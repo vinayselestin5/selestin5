@@ -1,3 +1,4 @@
+
 #dictionary
 a=['1','2','3','4','5','6','7','8','9']
 
@@ -29,12 +30,31 @@ while True:
 				playerOverTurn = not playerOverTurn
 			for i in(0,3,6):
 				if(a[i]==a[i+1] and a[i]==a[i+2]):
-					print("game over");
+					print("game over")
 					exit()
 				for i in range(3):
 					if(a[i]==a[i+3] and a[i]==a[6]):
 						print("gave over")
 						exit()
-					if(a[i]==a[4] and  a[i]==a[6]):
-						print("game over")
-						exit()
+#checking for diagonal (form left to right)
+	if (a[0]==a[4] and a[0]==a[8]):
+		print("game is over")
+		if(a[4]=='X'):
+			print("congratulations to player 1")
+		else:
+			print("congratulations to player 2")
+		print_board()
+		exit()
+
+#checking for diagonal (form right to left)
+	if (a[2]==a[4] and a[2]==a[6]):
+		print("game is over")
+		if(a[4]=='X'):
+			print("congratulations to player 1")
+		else:
+			print("congratulations to player 2")
+		print_board()
+		exit()
+	else:
+		print("you entered invalid position")
+		continue

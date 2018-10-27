@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import os
  
 GPIO.setmode(GPIO.BCM)
  
@@ -30,7 +31,7 @@ def distance():
     TimeElapsed = StopTime - StartTime
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
-    distance = (TimeElapsed * 34300) / 2
+    distance = round((TimeElapsed * 34300) / 2,2)
  
     return distance
  
@@ -39,9 +40,16 @@ if __name__ == '__main__':
         while True:
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
-            time.sleep(1)
+            time.sleep(5)
+            if(dist<=50):
+                print("object is near by")
+                os.system("fswebcam -F 4 --fps 20 -r 800*600 /home/pi/vvv/"+str(dist)+".jpg")
+                print("pic Taken")
+                
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
+        
+
